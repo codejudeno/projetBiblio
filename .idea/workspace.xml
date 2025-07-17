@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="785040b5-e777-4370-b6cd-fe0163b8f1ad" name="Changes" comment="Premye commit">
-      <change beforePath="$PROJECT_DIR$/src/GestionDonnee/interfacePrincipale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionDonnee/interfacePrincipale.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionDonnee/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionDonnee/Session.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +33,9 @@
       </branch-storage>
     </excluded-from-favorite>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 4
@@ -102,7 +105,15 @@
       <option name="project" value="LOCAL" />
       <updated>1752770523847</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Premye commit">
+      <option name="closed" value="true" />
+      <created>1752770734516</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1752770734516</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
