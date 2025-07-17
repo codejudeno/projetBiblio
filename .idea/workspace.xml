@@ -5,13 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="785040b5-e777-4370-b6cd-fe0163b8f1ad" name="Changes" comment="Premye commit">
-      <change beforePath="$PROJECT_DIR$/src/GestionDonnee/ui_Livre.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionDonnee/ui_Livre.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionDonnee/interfacePrincipale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionDonnee/interfacePrincipale.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+      <option value="module" />
+    </option>
   </component>
   <component name="Git.Settings">
     <excluded-from-favorite>
@@ -81,7 +86,23 @@
       <option name="project" value="LOCAL" />
       <updated>1752769777538</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Premye commit">
+      <option name="closed" value="true" />
+      <created>1752770383197</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1752770383197</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Premye commit">
+      <option name="closed" value="true" />
+      <created>1752770523847</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1752770523847</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

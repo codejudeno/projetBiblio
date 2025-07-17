@@ -23,7 +23,7 @@ public class interfacePrincipale extends javax.swing.JFrame {
 
         btnLivre.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               new ui_Livre().setVisible(true);
+               //new ui_Livre().setVisible(true);
             }
         });
 // Mete bouton an transparan san border
@@ -744,11 +744,11 @@ btnDeconnecter.addMouseListener(new java.awt.event.MouseAdapter() {
 
     private void  btnLivreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
         // TODO add your handling code here:
-       new ui_Livre().setVisible(true);
+      // new ui_Livre().setVisible(true);
     }
     private void btnAdherantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdherantActionPerformed
         // TODO add your handling code here:
-        new ui_Livre().setVisible(true);
+        //new ui_Livre().setVisible(true);
     }//GEN-LAST:event_btnAdherantActionPerformed
 
     private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
