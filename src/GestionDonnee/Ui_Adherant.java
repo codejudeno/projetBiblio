@@ -3,18 +3,38 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GestionDonnee;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+import java.sql.*;
 
 /**
  *
  * @author Squirrel
  */
 public class Ui_Adherant extends javax.swing.JFrame {
-
+    private DefaultTableModel model; // Déclaration correcte
     /**
      * Creates new form Ui_Adherant
      */
-    public Ui_Adherant() {
+    public Ui_Adherant()
+    {
         initComponents();
+        connecterBD(); // Établir la connexion
+
+        // Initialiser le modèle de table
+        model = (DefaultTableModel) jTable2.getModel();
+        // Définir les noms de colonnes si nécessaire
+        model.setColumnIdentifiers(new String[]{
+                "ID-Adgerant", "Nom", "Prenom", "Adresse",
+                "Sexe", "Telephone", "Niveau",
+                "Statut"
+        });
+        chargerAdherant();
     }
 
     /**
@@ -24,7 +44,8 @@ public class Ui_Adherant extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jPanel6 = new javax.swing.JPanel();
         jButton9 = new javax.swing.JButton();
@@ -40,15 +61,18 @@ public class Ui_Adherant extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        roundedPanel1 = new GestionDonnee.RoundedPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
-        txt_Nom = new javax.swing.JTextField();
-        textTitre1 = new javax.swing.JTextField();
-        textTitre2 = new javax.swing.JTextField();
-        textTitre5 = new javax.swing.JTextField();
+        textField_Nom = new javax.swing.JTextField();
+        textField_Prenom = new javax.swing.JTextField();
+        textField_Adresse = new javax.swing.JTextField();
+        textField_Telephone = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -60,14 +84,17 @@ public class Ui_Adherant extends javax.swing.JFrame {
         btnAnnuler = new javax.swing.JButton();
         btnAJouterModification = new javax.swing.JButton();
         btnAJouter = new javax.swing.JButton();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboBox_Sexe = new javax.swing.JComboBox<>();
+        comboBox_Niveau = new javax.swing.JComboBox<>();
         jComboBox4 = new javax.swing.JComboBox<>();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        btnAnnuler2 = new javax.swing.JButton();
-        btnAnnuler3 = new javax.swing.JButton();
+        btnmodifier = new javax.swing.JButton();
+        btnSuprimer = new javax.swing.JButton();
+        roundedPanel2 = new GestionDonnee.RoundedPanel();
+        jLabel17 = new javax.swing.JLabel();
+        comboBox_Statue = new javax.swing.JComboBox<>();
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -195,6 +222,49 @@ public class Ui_Adherant extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Boocraft");
 
+        roundedPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTextField1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jTextField1.setBorder(null);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(247, 246, 246));
+        jButton1.setToolTipText("Recherche");
+        jButton1.setContentAreaFilled(false);
+        jButton1.setFocusPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout roundedPanel1Layout = new javax.swing.GroupLayout(roundedPanel1);
+        roundedPanel1.setLayout(roundedPanel1Layout);
+        roundedPanel1Layout.setHorizontalGroup(
+            roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedPanel1Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        roundedPanel1Layout.setVerticalGroup(
+            roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundedPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addGroup(roundedPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField1)))
+                .addGap(5, 5, 5))
+        );
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -202,7 +272,9 @@ public class Ui_Adherant extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 271, Short.MAX_VALUE)
+                .addComponent(roundedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(230, 230, 230)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
@@ -215,6 +287,7 @@ public class Ui_Adherant extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(roundedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -322,14 +395,14 @@ public class Ui_Adherant extends javax.swing.JFrame {
             }
         });
 
-        jComboBox3.setBackground(new java.awt.Color(250, 248, 248));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBox_Sexe.setBackground(new java.awt.Color(250, 248, 248));
+        comboBox_Sexe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "","Masculin", "Feminin" }));
 
-        jComboBox1.setBackground(new java.awt.Color(250, 248, 248));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBox_Niveau.setBackground(new java.awt.Color(250, 248, 248));
+        comboBox_Niveau.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "","Eleve", "Etudiant", "Professionel", "Autre" }));
 
         jComboBox4.setBackground(new java.awt.Color(250, 248, 248));
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Actif", "Inactif"}));
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -339,15 +412,15 @@ public class Ui_Adherant extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_Nom, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textField_Nom, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textTitre1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textField_Prenom, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(textTitre2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textField_Adresse, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                                 .addGap(388, 388, 388)
@@ -362,21 +435,21 @@ public class Ui_Adherant extends javax.swing.JFrame {
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboBox_Sexe, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textTitre5, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textField_Telephone, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboBox_Niveau, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                                     .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(13, Short.MAX_VALUE))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
@@ -395,12 +468,12 @@ public class Ui_Adherant extends javax.swing.JFrame {
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_Nom, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textTitre1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textTitre2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textTitre5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textField_Nom, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textField_Prenom, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textField_Adresse, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textField_Telephone, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBox_Sexe, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBox_Niveau, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -425,20 +498,64 @@ public class Ui_Adherant extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID-Livre", "Titre", "Auteur", "ISBN","Categorie","Édition","Publication","Nbr.d'examplaire"
+                    "ID-Adgerant", "Nom", "Prenom", "Adresse",
+                    "Sexe", "Telephone", "Niveau",
+                    "Statut"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        btnAnnuler2.setBackground(new java.awt.Color(247, 246, 246));
-        btnAnnuler2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        btnAnnuler2.setIcon(new javax.swing.ImageIcon("C:\\BookCraft_application\\icon\\icons8_edit_24px.png")); // NOI18N
-        btnAnnuler2.setText("Modifier");
+        btnmodifier.setBackground(new java.awt.Color(247, 246, 246));
+        btnmodifier.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        btnmodifier.setIcon(new javax.swing.ImageIcon("C:\\BookCraft_application\\icon\\icons8_edit_24px.png")); // NOI18N
+        btnmodifier.setText("Modifier");
+        btnmodifier.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                modifierAdherant();
+            }
+        });
 
-        btnAnnuler3.setBackground(new java.awt.Color(247, 246, 246));
-        btnAnnuler3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        btnAnnuler3.setIcon(new javax.swing.ImageIcon("C:\\BookCraft_application\\icon\\icons8_delete_bin_24px.png")); // NOI18N
-        btnAnnuler3.setText("Annuler");
+        btnSuprimer.setBackground(new java.awt.Color(247, 246, 246));
+        btnSuprimer.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        btnSuprimer.setIcon(new javax.swing.ImageIcon("C:\\BookCraft_application\\icon\\icons8_delete_bin_24px.png")); // NOI18N
+        btnSuprimer.setText("Supprimer");
+
+        btnSuprimer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                supprimerAdherant();
+            }
+        });
+
+        roundedPanel2.setBackground(new java.awt.Color(1, 4, 88));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setIcon(new javax.swing.ImageIcon("C:\\BookCraft_application\\icon\\descending_sorting_26px.png")); // NOI18N
+        jLabel17.setText("Filtre");
+
+        comboBox_Statue.setBackground(new java.awt.Color(250, 248, 248));
+        comboBox_Statue.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        comboBox_Statue.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout roundedPanel2Layout = new javax.swing.GroupLayout(roundedPanel2);
+        roundedPanel2.setLayout(roundedPanel2Layout);
+        roundedPanel2Layout.setHorizontalGroup(
+            roundedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundedPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboBox_Statue, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        roundedPanel2Layout.setVerticalGroup(
+            roundedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboBox_Statue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -449,7 +566,9 @@ public class Ui_Adherant extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(roundedPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
@@ -457,8 +576,8 @@ public class Ui_Adherant extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAnnuler2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAnnuler3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnmodifier, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSuprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21))
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -470,21 +589,23 @@ public class Ui_Adherant extends javax.swing.JFrame {
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
+                        .addGap(167, 167, 167)
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                        .addComponent(roundedPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(15, 15, 15))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnAnnuler2)
+                                .addComponent(btnmodifier)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnAnnuler3)
+                                .addComponent(btnSuprimer)
                                 .addGap(130, 130, 130))))))
         );
 
@@ -512,6 +633,14 @@ public class Ui_Adherant extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton14ActionPerformed
@@ -527,7 +656,8 @@ public class Ui_Adherant extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -563,8 +693,9 @@ public class Ui_Adherant extends javax.swing.JFrame {
     private javax.swing.JButton btnAJouter;
     public javax.swing.JButton btnAJouterModification;
     private javax.swing.JButton btnAnnuler;
-    private javax.swing.JButton btnAnnuler2;
-    private javax.swing.JButton btnAnnuler3;
+    private javax.swing.JButton btnmodifier;
+    private javax.swing.JButton btnSuprimer;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
@@ -575,8 +706,9 @@ public class Ui_Adherant extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> comboBox_Niveau;
+    private javax.swing.JComboBox<String> comboBox_Statue;
+    private javax.swing.JComboBox<String> comboBox_Sexe;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -585,6 +717,7 @@ public class Ui_Adherant extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -598,9 +731,219 @@ public class Ui_Adherant extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField textTitre1;
-    private javax.swing.JTextField textTitre2;
-    private javax.swing.JTextField textTitre5;
-    private javax.swing.JTextField txt_Nom;
+    private javax.swing.JTextField jTextField1;
+    private GestionDonnee.RoundedPanel roundedPanel1;
+    private GestionDonnee.RoundedPanel roundedPanel2;
+    private javax.swing.JTextField textField_Prenom;
+    private javax.swing.JTextField textField_Adresse;
+    private javax.swing.JTextField textField_Telephone;
+    private javax.swing.JTextField textField_Nom;
+    private static Set<String> usedIds = new HashSet<>();
+    private String idAdherant,nom,prenom,sexe,adresse,niveau,statut,telephone;
+
     // End of variables declaration//GEN-END:variables
+
+    //connexion BD
+    public static String chaineConnexion = "jdbc:mysql://localhost/bd_BooCraft_UIApp";
+    public static String hote = "root";
+    public static String password = "";
+    public static Connection conn = null;
+    public static Statement stat = null;
+    public static ResultSet rs = null;
+
+    private void connecterBD()
+    {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Chaje driver MySQL
+            conn = DriverManager.getConnection(chaineConnexion, hote, password);
+            System.out.println("✅ Connexion réussie !");
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("❌ Erreur de connexion à la base de données: " + e.getMessage());
+        }
+    }
+
+    private String generateUniqueId(String nom, String prenom)
+    {
+        // Extraire les 2 premières lettres du titre et de l'auteur
+        String partieNom = nom.length() >= 2 ? nom.substring(0, 2).toUpperCase() : nom.toUpperCase();
+        String partiePrenom = prenom.length() >= 2 ? prenom.substring(0, 2).toUpperCase() : prenom.toUpperCase();
+
+        // Générer un nombre aléatoire de 4 chiffres entre 1 et 1000
+        Random rand = new Random();
+        int nombreAleatoire = rand.nextInt(1000) + 1;
+        String nombreFormatte = String.format("%04d", nombreAleatoire); // Formatage à 4 chiffres
+
+        // Combiner les parties pour former l'ID
+        String newId = partieNom + partiePrenom + nombreFormatte;
+
+        // Vérifier si l'ID existe déjà dans la base de données
+        do {
+            nombreAleatoire = rand.nextInt(1000) + 1;
+            nombreFormatte = String.format("%04d", nombreAleatoire);
+            newId = partieNom + partiePrenom + nombreFormatte;
+        } while (usedIds.contains(newId));
+        return newId;
+    }
+
+    private void setChamps()
+    {
+        // Reset fields and buttons
+        textField_Nom.setText("");
+        textField_Prenom.setText("");
+        textField_Adresse.setText("");
+        comboBox_Sexe.setSelectedIndex(0);
+        comboBox_Niveau.setSelectedIndex(0);
+        comboBox_Statue.setSelectedIndex(0);
+        textField_Telephone.setText("");
+
+    }
+
+    private void variable()
+    {
+        nom = textField_Nom.getText().trim();
+        prenom = textField_Prenom.getText().trim();
+        idAdherant= generateUniqueId(nom, prenom);
+        adresse = textField_Adresse.getText().trim();
+        sexe = (String)comboBox_Sexe.getSelectedItem();
+        telephone = textField_Telephone.getText().trim();
+        niveau = (String)comboBox_Niveau.getSelectedItem();
+        statut = (String)comboBox_Statue.getSelectedItem();
+    }
+
+    private void chargerAdherant() {
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0); // Vider le tableau avant de le remplir
+
+        try {
+            conn = DriverManager.getConnection(chaineConnexion, hote, password);
+            stat = conn.createStatement();
+            rs = stat.executeQuery("SELECT * FROM bd_AdherantApp");
+
+            while(rs.next()) {
+                model.addRow(new Object[]{
+                        rs.getString("idAdherant"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("adresse"),
+                        rs.getString("sexe"),
+                        rs.getString("telephone"),
+                        rs.getString("niveau"),
+                        rs.getString("statut")
+                });
+            }
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Erreur lors du chargement des adhérents: " + e.getMessage(),
+                    "Erreur", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            // Fermer les ressources
+            try { if (rs != null) rs.close(); } catch (SQLException e) { /* ignored */ }
+            try { if (stat != null) stat.close(); } catch (SQLException e) { /* ignored */ }
+            try { if (conn != null) conn.close(); } catch (SQLException e) { /* ignored */ }
+        }
+    }
+
+    private void ajouterAdherant()
+    {
+        variable(); // Récupérer les valeurs des champs
+
+        if(nom.isEmpty() || prenom.isEmpty() || adresse.isEmpty() || telephone.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Veuillez remplir tous les champs obligatoires",
+                    "Champs manquants", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String query = "INSERT INTO bd_AdherantApp (idAdherant, nom, prenom, sexe, adresse, niveau, telephone, statut) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(chaineConnexion, hote, password);
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, idAdherant);
+            pstmt.setString(2, nom);
+            pstmt.setString(3, prenom);
+            pstmt.setString(4, sexe);
+            pstmt.setString(5, adresse);
+            pstmt.setString(6, niveau);
+            pstmt.setString(7, telephone);
+            pstmt.setString(8, statut);
+
+            int rows = pstmt.executeUpdate();
+            if(rows > 0) {
+                JOptionPane.showMessageDialog(this,
+                        "Adhérent ajouté avec succès!\nID: " + idAdherant,
+                        "Succès", JOptionPane.INFORMATION_MESSAGE);
+                setChamps(); // Réinitialiser les champs
+                chargerAdherant(); // Rafraîchir le tableau
+            }
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Erreur lors de l'ajout: " + e.getMessage(),
+                    "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void modifierAdherant()
+    {
+        int selectedRow = jTable2.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this,
+                    "Veuillez sélectionner une ligne à modifier.",
+                    "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Remplir les champs avec les données de la ligne sélectionnée
+        textField_Nom.setText(model.getValueAt(selectedRow, 1).toString());
+        textField_Prenom.setText(model.getValueAt(selectedRow, 2).toString());
+        textField_Adresse.setText(model.getValueAt(selectedRow, 3).toString());
+        comboBox_Sexe.setSelectedItem(model.getValueAt(selectedRow, 4).toString());
+        textField_Telephone.setText(model.getValueAt(selectedRow, 5).toString());
+        comboBox_Niveau.setSelectedItem(model.getValueAt(selectedRow, 6).toString());
+        comboBox_Statue.setSelectedItem(model.getValueAt(selectedRow, 7).toString());
+
+        // Cachez le bouton Ajouter et affichez le bouton Modifier
+        btnAJouter.setVisible(false);
+        btnAJouterModification.setVisible(true);
+    }
+
+    private void supprimerAdherant()
+    {
+        int selectedRow = jTable2.getSelectedRow();
+        if(selectedRow == -1) {
+            JOptionPane.showMessageDialog(this,
+                    "Veuillez sélectionner un adhérent à supprimer",
+                    "Aucune sélection", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String id = (String) jTable2.getValueAt(selectedRow, 0);
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "Voulez-vous vraiment supprimer cet adhérent?\nID: " + id,
+                "Confirmation", JOptionPane.YES_NO_OPTION);
+
+        if(confirm == JOptionPane.YES_OPTION) {
+            String query = "DELETE FROM bd_AdherantApp WHERE idAdherant=?";
+
+            try (Connection conn = DriverManager.getConnection(chaineConnexion, hote, password);
+                 PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+                pstmt.setString(1, id);
+                int rows = pstmt.executeUpdate();
+                if(rows > 0) {
+                    JOptionPane.showMessageDialog(this,
+                            "Adhérent supprimé avec succès!",
+                            "Succès", JOptionPane.INFORMATION_MESSAGE);
+                    chargerAdherant(); // Rafraîchir le tableau
+                }
+            } catch(SQLException e) {
+                JOptionPane.showMessageDialog(this,
+                        "Erreur lors de la suppression: " + e.getMessage(),
+                        "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
 }
