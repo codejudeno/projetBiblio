@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="785040b5-e777-4370-b6cd-fe0163b8f1ad" name="Changes" comment="Premye commit">
-      <change afterPath="$PROJECT_DIR$/src/GestionDonnee/ui_Livre.java" afterDir="false" />
-    </list>
+    <list default="true" id="785040b5-e777-4370-b6cd-fe0163b8f1ad" name="Changes" comment="ui_Livre commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -121,11 +119,20 @@
       <option name="project" value="LOCAL" />
       <updated>1752770734516</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="ui_Livre commit">
+      <option name="closed" value="true" />
+      <created>1752852012949</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1752852012949</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Premye commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Premye commit" />
+    <MESSAGE value="ui_Livre commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="ui_Livre commit" />
   </component>
 </project>
