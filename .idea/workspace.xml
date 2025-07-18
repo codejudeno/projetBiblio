@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="785040b5-e777-4370-b6cd-fe0163b8f1ad" name="Changes" comment="ui_Livre commit" />
+    <list default="true" id="785040b5-e777-4370-b6cd-fe0163b8f1ad" name="Changes" comment="ui_Livre commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projet_app_Biblio.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Projet_app_Biblio.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionDonnee/Ui_Adherant.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionDonnee/Ui_Adherant.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionDonnee/Ui_Adherant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionDonnee/Ui_Adherant.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,6 +44,18 @@
     </excluded-from-favorite>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;duck-duck-brain&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/codejudeno/projetBiblio.git&quot;,
+    &quot;accountId&quot;: &quot;04d740bf-8fc9-41e4-96aa-2f86d0551564&quot;
+  }
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -53,13 +70,16 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Ui_Adherant.executor": "Run",
+    "Application.interfacePrincipale.executor": "Run",
+    "Application.ui_Livre.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Squirrel/Desktop/projetBiblio",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "last_opened_file_path": "C:/Users/Squirrel/Desktop/mysql-connector-j-8.1.0/mysql-connector-j-8.1.0/mysql-connector-j-8.1.0.jar",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.30804598"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -127,7 +147,15 @@
       <option name="project" value="LOCAL" />
       <updated>1752852012949</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="ui_Livre commit">
+      <option name="closed" value="true" />
+      <created>1752852592229</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1752852592229</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
