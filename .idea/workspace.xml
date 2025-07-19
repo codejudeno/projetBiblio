@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="785040b5-e777-4370-b6cd-fe0163b8f1ad" name="Changes" comment="ui_Livre commit">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projet_app_Biblio.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Projet_app_Biblio.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionDonnee/Ui_Adherant.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionDonnee/Ui_Adherant.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionDonnee/Ui_Adherant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionDonnee/Ui_Adherant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionDonnee/ui_Livre.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionDonnee/ui_Livre.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +74,8 @@
     "Application.interfacePrincipale.executor": "Run",
     "Application.ui_Livre.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "false",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "false",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Squirrel/Desktop/mysql-connector-j-8.1.0/mysql-connector-j-8.1.0/mysql-connector-j-8.1.0.jar",
