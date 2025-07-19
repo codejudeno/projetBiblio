@@ -645,6 +645,8 @@ public class ui_Livre extends javax.swing.JFrame {
 
     private void comboBox_CategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_CategorieActionPerformed
         // TODO add your handling code here:
+
+        ajouterCategorie();
     }//GEN-LAST:event_comboBox_CategorieActionPerformed
 
     /**
