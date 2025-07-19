@@ -391,7 +391,7 @@ public class Ui_Adherant extends javax.swing.JFrame {
         btnAJouter.setText("Ajouter");
         btnAJouter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAJouterActionPerformed(evt);
+                ajouterAdherant();
             }
         });
 
@@ -509,11 +509,42 @@ public class Ui_Adherant extends javax.swing.JFrame {
         btnmodifier.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         btnmodifier.setIcon(new javax.swing.ImageIcon("C:\\BookCraft_application\\icon\\icons8_edit_24px.png")); // NOI18N
         btnmodifier.setText("Modifier");
-        btnmodifier.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                modifierAdherant();
+
+        btnmodifier.addActionListener(e ->
+        {
+            int selectedRow = jTable2.getSelectedRow();
+
+            if (selectedRow >= 0) {
+                // 1. Charger les données dans les champs
+                textField_Nom.setText(model.getValueAt(selectedRow, 1).toString());
+                textField_Prenom.setText(model.getValueAt(selectedRow, 2).toString());
+                textField_Adresse.setText(model.getValueAt(selectedRow, 3).toString());
+                comboBox_Sexe.setSelectedItem(model.getValueAt(selectedRow, 4).toString());
+                textField_Telephone.setText(model.getValueAt(selectedRow, 5).toString());
+                comboBox_Niveau.setSelectedItem(model.getValueAt(selectedRow, 6).toString());
+                comboBox_Statue.setSelectedItem(model.getValueAt(selectedRow, 7).toString());
+
+                // 2. Changer l'état des boutons
+                btnmodifier.setEnabled(false);
+                btnAJouter.setVisible(false);
+                btnAJouterModification.setVisible(true);
+                btnAJouterModification.setText("Enregistrer");
+                btnSuprimer.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Veuillez sélectionner une ligne à modifier.",
+                        "Erreur", JOptionPane.ERROR_MESSAGE);
             }
+        });
+
+        btnAJouterModification.addActionListener(e -> {
+            modifierAdherant(); // Appeler la méthode de modification
+
+            // Remettre les boutons dans leur état initial
+            btnmodifier.setEnabled(true);
+            btnAJouter.setVisible(true);
+            btnAJouterModification.setVisible(false);
+            btnAJouterModification.setText("Ajouter");
         });
 
         btnSuprimer.setBackground(new java.awt.Color(247, 246, 246));
@@ -887,7 +918,6 @@ public class Ui_Adherant extends javax.swing.JFrame {
     private void modifierAdherant()
     {
         int selectedRow = jTable2.getSelectedRow();
-
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this,
                     "Veuillez sélectionner une ligne à modifier.",
@@ -895,18 +925,76 @@ public class Ui_Adherant extends javax.swing.JFrame {
             return;
         }
 
-        // Remplir les champs avec les données de la ligne sélectionnée
-        textField_Nom.setText(model.getValueAt(selectedRow, 1).toString());
-        textField_Prenom.setText(model.getValueAt(selectedRow, 2).toString());
-        textField_Adresse.setText(model.getValueAt(selectedRow, 3).toString());
-        comboBox_Sexe.setSelectedItem(model.getValueAt(selectedRow, 4).toString());
-        textField_Telephone.setText(model.getValueAt(selectedRow, 5).toString());
-        comboBox_Niveau.setSelectedItem(model.getValueAt(selectedRow, 6).toString());
-        comboBox_Statue.setSelectedItem(model.getValueAt(selectedRow, 7).toString());
+        String id = model.getValueAt(selectedRow, 0).toString();
 
-        // Cachez le bouton Ajouter et affichez le bouton Modifier
-        btnAJouter.setVisible(false);
-        btnAJouterModification.setVisible(true);
+        // Get values from text fields
+        String newNom = textField_Nom.getText().trim();
+        String newPrenom = textField_Prenom.getText().trim();
+        String newAdresse = textField_Adresse.getText().trim();
+        String newSexe = (String) comboBox_Sexe.getSelectedItem();
+        String newTelephone = textField_Telephone.getText().trim();
+        String newNiveau = (String) comboBox_Niveau.getSelectedItem();
+        String newStatut = (String) comboBox_Statue.getSelectedItem();
+
+        // Validate fields
+        if (newNom.isEmpty() || newPrenom.isEmpty() || newAdresse.isEmpty() ||
+                newSexe.isEmpty() || newTelephone.isEmpty() || newNiveau.isEmpty() ||
+                newStatut.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Vous n'avez pas rempli tous les champs obligatoires, SVP recommencer le processus !",
+                    "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            conn = DriverManager.getConnection(chaineConnexion, hote, password);
+            String updateQuery = "UPDATE bd_AdherantApp SET nom=?, prenom=?, adresse=?, sexe=?, " +
+                    "telephone=?, niveau=?, statut=? WHERE idAdherant=?";
+
+            PreparedStatement pst = conn.prepareStatement(updateQuery);
+            pst.setString(1, newNom);
+            pst.setString(2, newPrenom);
+            pst.setString(3, newAdresse);
+            pst.setString(4, newSexe);
+            pst.setString(5, newTelephone);
+            pst.setString(6, newNiveau);
+            pst.setString(7, newStatut);
+            pst.setString(8, id);
+
+            int rowsAffected = pst.executeUpdate();
+
+            if (rowsAffected > 0) {
+                // Update the table model
+                model.setValueAt(newNom, selectedRow, 1);
+                model.setValueAt(newPrenom, selectedRow, 2);
+                model.setValueAt(newAdresse, selectedRow, 3);
+                model.setValueAt(newSexe, selectedRow, 4);
+                model.setValueAt(newTelephone, selectedRow, 5);
+                model.setValueAt(newNiveau, selectedRow, 6);
+                model.setValueAt(newStatut, selectedRow, 7);
+
+                JOptionPane.showMessageDialog(this,
+                        "Adhérent modifié avec succès!",
+                        "Succès", JOptionPane.INFORMATION_MESSAGE);
+                setChamps();
+
+                // Réafficher le bouton Ajouter et cacher le bouton Modifier
+                btnAJouter.setVisible(true);
+                btnAJouterModification.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Aucune modification effectuée.",
+                        "Information", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            pst.close();
+            conn.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Erreur SQL: " + ex.getMessage(),
+                    "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
     private void supprimerAdherant()
