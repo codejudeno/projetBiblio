@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="785040b5-e777-4370-b6cd-fe0163b8f1ad" name="Changes" comment="ui_Livre commit">
+    <list default="true" id="785040b5-e777-4370-b6cd-fe0163b8f1ad" name="Changes" comment="ui_general commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionDonnee/Ui_Adherant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionDonnee/Ui_Adherant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GestionDonnee/ui_Livre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionDonnee/ui_Livre.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,13 +168,30 @@
       <option name="project" value="LOCAL" />
       <updated>1752853430513</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="ui_general commit">
+      <option name="closed" value="true" />
+      <created>1752940883710</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1752940883710</updated>
+    </task>
+    <task id="LOCAL-00012" summary="ui_general commit">
+      <option name="closed" value="true" />
+      <created>1752940965760</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1752940965760</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Premye commit" />
     <MESSAGE value="ui_Livre commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="ui_Livre commit" />
+    <MESSAGE value="ui_general commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="ui_general commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
