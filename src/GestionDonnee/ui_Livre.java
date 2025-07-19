@@ -487,7 +487,8 @@ public class ui_Livre extends javax.swing.JFrame {
             }
         });
 
-        btnAJouterModification.addActionListener(e -> {
+        btnAJouterModification.addActionListener(e ->
+        {
             modifierLivre(); // Appeler la méthode de modification
 
             // Remettre les boutons dans leur état initial
