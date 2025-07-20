@@ -5,6 +5,7 @@
 package GestionDonnee;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 /**
@@ -18,7 +19,13 @@ public class interfacePrincipale extends javax.swing.JFrame {
      */
     public interfacePrincipale() {
         initComponents();
-        setLocationRelativeTo(null);
+        this.setSize(1200, 700); // nouvo taille ou
+        this.setLocationRelativeTo(null); // mete fòm nan nan mitan
+
+        jPanel1.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
+        jPanel1.setMaximumSize(new Dimension(this.getWidth(), this.getHeight()));
+        jPanel1.setMinimumSize(new Dimension(this.getWidth(), this.getHeight()));
+
         menuFalse();
 
         btnLivre.addActionListener(new ActionListener() {
@@ -240,10 +247,9 @@ btnDeconnecter.addMouseListener(new java.awt.event.MouseAdapter() {
         comboBoxrapport = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1253, 699));
+        setPreferredSize(new java.awt.Dimension(1200, 700));
 
         jPanel1.setBackground(new java.awt.Color(1, 4, 88));
-
         roundedPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jButton1.setBackground(new java.awt.Color(248, 246, 246));
